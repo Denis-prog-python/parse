@@ -1,13 +1,18 @@
 import requests
 
-# Отправляем GET-запрос к API с параметром userId=1
-response = requests.get('https://jsonplaceholder.typicode.com/posts', params={'userId': 1})
+# Данные для отправки (новый пост)
+new_post = {
+    'title': 'foo',
+    'body': 'bar',
+    'userId': 1
+}
 
-# Проверяем статус-код (200 - успешно)
+# Отправляем POST-запрос
+response = requests.post('https://jsonplaceholder.typicode.com/posts', json=new_post)
+
+# Выводим статус-код (201 - Created, если успешно)
 print("Статус-код ответа:", response.status_code)
 
-# Выводим полученные записи в формате JSON
-print("\nПолученные записи:")
-posts = response.json()
-for post in posts:
-    print(post)
+# Выводим содержимое ответа (созданная запись)
+print("\nОтвет сервера (созданный пост):")
+print(response.json())
