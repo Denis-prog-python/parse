@@ -1,18 +1,11 @@
 import requests
 
-# Данные для отправки (новый пост)
-new_post = {
-    'title': 'foo',
-    'body': 'bar',
-    'userId': 1
-}
+# Отправляем GET-запрос к API GitHub для поиска репозиториев с кодом html
+response = requests.get('https://api.github.com/search/repositories', params={'q': 'html'})
 
-# Отправляем POST-запрос
-response = requests.post('https://jsonplaceholder.typicode.com/posts', json=new_post)
-
-# Выводим статус-код (201 - Created, если успешно)
+# Печатаем статус-код ответа
 print("Статус-код ответа:", response.status_code)
 
-# Выводим содержимое ответа (созданная запись)
-print("\nОтвет сервера (созданный пост):")
+# Печатаем содержимое ответа в формате JSON
+print("Содержимое ответа:")
 print(response.json())
